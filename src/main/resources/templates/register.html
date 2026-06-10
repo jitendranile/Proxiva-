@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register - Proxiva</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #050505, #111827, #1f2937);
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            width: 480px;
+            height: 480px;
+            background: linear-gradient(135deg, #7c3aed, #2563eb);
+            border-radius: 50%;
+            filter: blur(140px);
+            top: -120px;
+            left: -120px;
+            opacity: 0.45;
+        }
+
+        body::after {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            background: linear-gradient(135deg, #06b6d4, #22c55e);
+            border-radius: 50%;
+            filter: blur(150px);
+            bottom: -120px;
+            right: -120px;
+            opacity: 0.35;
+        }
+
+        .register-box {
+            width: 430px;
+            padding: 42px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(22px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+            z-index: 1;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 34px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: white;
+        }
+
+        .tagline {
+            text-align: center;
+            color: #d1d5db;
+            font-size: 14px;
+            margin: 10px 0 30px;
+        }
+
+        .input-box {
+            margin-bottom: 18px;
+        }
+
+        .input-box input,
+        .input-box select {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            outline: none;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            font-size: 15px;
+        }
+
+        .input-box input::placeholder {
+            color: #cbd5e1;
+        }
+
+        .input-box select {
+            color: #cbd5e1;
+        }
+
+        .input-box option {
+            color: #111;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #7c3aed, #2563eb);
+            color: white;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 8px;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(124, 58, 237, 0.45);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 22px;
+            color: #d1d5db;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #93c5fd;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .services {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .service {
+            padding: 8px 13px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.12);
+            color: #f3f4f6;
+            font-size: 13px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="register-box">
+
+    <div class="logo">PROXIVA</div>
+
+    <div class="tagline">
+        Intelligent Local Service Provider Platform
+    </div>
+
+    <form action="/register" method="post">
+
+        <div class="input-box">
+            <input type="text" name="name" placeholder="Enter Full Name" required>
+        </div>
+
+        <div class="input-box">
+            <input type="email" name="email" placeholder="Enter Email Address" required>
+        </div>
+
+        <div class="input-box">
+            <input type="password" name="password" placeholder="Create Password" required>
+        </div>
+
+        <div class="input-box">
+            <select name="role" required>
+                <option value="">Select Role</option>
+                <option value="customer">Customer</option>
+                <option value="provider">Service Provider</option>
+            </select>
+        </div>
+
+        <button type="submit" class="register-btn">Create Account</button>
+
+    </form>
+
+    <div class="login-link">
+        Already have an account?
+        <a href="/login">Login</a>
+    </div>
+
+    <div class="services">
+        <div class="service">⚡ Electrician</div>
+        <div class="service">🚰 Plumbing</div>
+        <div class="service">🪚 Carpenter</div>
+        <div class="service">🎨 Painting</div>
+    </div>
+
+</div>
+
+</body>
+</html>

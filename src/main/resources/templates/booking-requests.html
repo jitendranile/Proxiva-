@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Booking Requests - Proxiva</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            background:linear-gradient(135deg,#050505,#111827,#1f2937);
+            padding:40px;
+            color:white;
+        }
+
+        .container{
+            max-width:1200px;
+            margin:auto;
+        }
+
+        .header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:35px;
+        }
+
+        .logo{
+            font-size:38px;
+            font-weight:900;
+            letter-spacing:2px;
+        }
+
+        .subtitle{
+            color:#cbd5e1;
+            margin-top:6px;
+        }
+
+        .back-btn{
+            text-decoration:none;
+            color:white;
+            padding:13px 20px;
+            border-radius:16px;
+            background:linear-gradient(135deg,#7c3aed,#2563eb);
+            font-weight:700;
+        }
+
+        .booking-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+            gap:25px;
+        }
+
+        .booking-card{
+            background:rgba(255,255,255,0.08);
+            backdrop-filter:blur(18px);
+            border:1px solid rgba(255,255,255,0.12);
+            padding:28px;
+            border-radius:28px;
+            box-shadow:0 15px 40px rgba(0,0,0,0.35);
+            transition:0.3s;
+        }
+
+        .booking-card:hover{
+            transform:translateY(-8px);
+        }
+
+        .booking-card h2{
+            margin-bottom:18px;
+        }
+
+        .info{
+            color:#d1d5db;
+            margin-bottom:12px;
+        }
+
+        .status{
+            display:inline-block;
+            padding:9px 16px;
+            border-radius:20px;
+            font-weight:800;
+            background:#f59e0b;
+            color:white;
+        }
+
+        .actions{
+            display:flex;
+            gap:12px;
+            margin-top:24px;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            text-decoration:none;
+            padding:12px 18px;
+            border-radius:15px;
+            color:white;
+            font-weight:700;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            transform:scale(1.05);
+        }
+
+        .accept{
+            background:#16a34a;
+        }
+
+        .reject{
+            background:#dc2626;
+        }
+
+        .empty{
+            background:rgba(255,255,255,0.08);
+            padding:35px;
+            border-radius:25px;
+            text-align:center;
+            color:#d1d5db;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div>
+            <div class="logo">PROXIVA</div>
+            <div class="subtitle">Provider Booking Requests</div>
+        </div>
+
+        <a class="back-btn" href="/provider/dashboard">← Provider Dashboard</a>
+    </div>
+
+    <div class="empty" th:if="${bookings == null or bookings.size() == 0}">
+        <h2>No Booking Requests Found</h2>
+        <p>Customer bookings will appear here.</p>
+    </div>
+
+    <div class="booking-grid">
+
+        <div class="booking-card" th:each="booking : ${bookings}">
+
+            <h2>
+                Booking #<span th:text="${booking.id}"></span>
+            </h2>
+
+            <div class="info">
+                <strong>User ID:</strong>
+                <span th:text="${booking.userId}"></span>
+            </div>
+
+            <div class="info">
+                <strong>Service ID:</strong>
+                <span th:text="${booking.serviceId}"></span>
+            </div>
+
+            <div class="info">
+                <strong>Status:</strong>
+                <span class="status" th:text="${booking.status}"></span>
+            </div>
+
+            <div class="actions">
+                <a class="btn accept"
+                   th:href="@{'/booking/accept/' + ${booking.id}}">
+                    Accept
+                </a>
+
+                <a class="btn reject"
+                   th:href="@{'/booking/reject/' + ${booking.id}}">
+                    Reject
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

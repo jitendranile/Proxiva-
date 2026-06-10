@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login - Proxiva</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI', sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#050505,#111827,#1f2937);
+            overflow:hidden;
+            position:relative;
+        }
+
+        /* GLOW EFFECTS */
+
+        body::before{
+            content:"";
+            position:absolute;
+            width:500px;
+            height:500px;
+            background:linear-gradient(135deg,#7c3aed,#2563eb);
+            border-radius:50%;
+            filter:blur(150px);
+            top:-150px;
+            left:-120px;
+            opacity:0.40;
+        }
+
+        body::after{
+            content:"";
+            position:absolute;
+            width:450px;
+            height:450px;
+            background:linear-gradient(135deg,#06b6d4,#22c55e);
+            border-radius:50%;
+            filter:blur(150px);
+            bottom:-140px;
+            right:-120px;
+            opacity:0.30;
+        }
+
+        /* LOGIN BOX */
+
+        .login-box{
+            width:420px;
+            padding:42px;
+            border-radius:30px;
+            background:rgba(255,255,255,0.08);
+            backdrop-filter:blur(22px);
+            border:1px solid rgba(255,255,255,0.15);
+            box-shadow:0 25px 60px rgba(0,0,0,0.45);
+            position:relative;
+            z-index:1;
+        }
+
+        .logo{
+            text-align:center;
+            font-size:34px;
+            font-weight:900;
+            letter-spacing:3px;
+            color:white;
+        }
+
+        .tagline{
+            text-align:center;
+            color:#d1d5db;
+            margin:10px 0 30px;
+            font-size:14px;
+        }
+
+        /* INPUTS */
+
+        .input-box{
+            margin-bottom:18px;
+        }
+
+        .input-box input{
+            width:100%;
+            padding:16px;
+            border:none;
+            outline:none;
+            border-radius:16px;
+            background:rgba(255,255,255,0.12);
+            color:white;
+            font-size:15px;
+        }
+
+        .input-box input::placeholder{
+            color:#cbd5e1;
+        }
+
+        /* LOGIN BUTTON */
+
+        .login-btn{
+            width:100%;
+            padding:16px;
+            border:none;
+            border-radius:18px;
+            background:linear-gradient(135deg,#7c3aed,#2563eb);
+            color:white;
+            font-size:16px;
+            font-weight:800;
+            cursor:pointer;
+            transition:0.3s;
+            margin-top:10px;
+        }
+
+        .login-btn:hover{
+            transform:translateY(-4px);
+            box-shadow:0 15px 35px rgba(124,58,237,0.45);
+        }
+
+        /* LINKS */
+
+        .register-link{
+            text-align:center;
+            margin-top:22px;
+            color:#d1d5db;
+            font-size:14px;
+        }
+
+        .register-link a{
+            color:#93c5fd;
+            text-decoration:none;
+            font-weight:700;
+        }
+
+        /* MESSAGE */
+
+        .success{
+            color:#4ade80;
+            text-align:center;
+            margin-bottom:15px;
+        }
+
+        .error{
+            color:#f87171;
+            text-align:center;
+            margin-bottom:15px;
+        }
+
+        /* SERVICE TAGS */
+
+        .services{
+            display:flex;
+            justify-content:center;
+            gap:10px;
+            flex-wrap:wrap;
+            margin-top:25px;
+        }
+
+        .service{
+            padding:8px 13px;
+            border-radius:14px;
+            background:rgba(255,255,255,0.10);
+            color:#f3f4f6;
+            font-size:13px;
+            border:1px solid rgba(255,255,255,0.10);
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <div class="logo">PROXIVA</div>
+
+    <div class="tagline">
+        Smart Local Service Booking Platform
+    </div>
+
+    <p class="success" th:text="${success}"></p>
+
+    <p class="error" th:text="${error}"></p>
+
+    <form action="/login" method="post">
+
+        <div class="input-box">
+            <input type="email"
+                   name="email"
+                   placeholder="Enter Email Address"
+                   required>
+        </div>
+
+        <div class="input-box">
+            <input type="password"
+                   name="password"
+                   placeholder="Enter Password"
+                   required>
+        </div>
+
+        <button type="submit"
+                class="login-btn">
+            Login Now
+        </button>
+
+    </form>
+
+    <div class="register-link">
+        New to Proxiva ?
+        <a href="/register">Create Account</a>
+    </div>
+
+    <div class="services">
+
+        <div class="service">⚡ Electrician</div>
+
+        <div class="service">🚰 Plumbing</div>
+
+        <div class="service">🪚 Carpenter</div>
+
+        <div class="service">🎨 Painting</div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Proxiva Dashboard</title>
+
+<link rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+<h1>PROXIVA</h1>
+<p>Customer Panel</p>
+
+<a class="active" href="/dashboard">🏠 Dashboard</a>
+<a href="/services">🔍 Find Services</a>
+<a href="/bookings">📅 My Bookings</a>
+<a href="#">👷 Providers</a>
+<a href="#">⭐ Reviews</a>
+<a href="#">👤 Profile</a>
+<a href="/login">🚪 Logout</a>
+
+</aside>
+
+
+<!-- Main -->
+
+<main class="main">
+
+<nav class="topbar">
+
+<input type="text"
+placeholder="Search for services...">
+
+<div class="user">
+
+<span>🔔</span>
+<span>✉️</span>
+
+<strong th:text="${user!=null ? user.name:'Customer'}">
+Customer
+</strong>
+
+</div>
+
+</nav>
+
+
+<section class="hero">
+
+<div>
+
+<h2 th:text="${user != null ? 'Welcome back, ' + user.name + ' 👋' : 'Welcome Back 👋'}">
+Welcome
+</h2>
+
+<p>
+Book trusted local services quickly and easily.
+</p>
+
+</div>
+
+<div class="hero-icons">
+🏠📍🌳
+</div>
+
+</section>
+
+
+
+<section class="stats">
+
+<div class="stat purple">
+
+<span>📋</span>
+
+<h3>Total Services</h3>
+
+<h2 th:text="${services!=null ? services.size() : 0}">
+0
+</h2>
+
+<p>Available</p>
+
+</div>
+
+
+<div class="stat blue">
+
+<span>📅</span>
+
+<h3>My Bookings</h3>
+
+<h2>06</h2>
+
+<p>Active</p>
+
+</div>
+
+
+<div class="stat green">
+
+<span>👷</span>
+
+<h3>Providers</h3>
+
+<h2>18</h2>
+
+<p>Online</p>
+
+</div>
+
+
+<div class="stat orange">
+
+<span>🛡️</span>
+
+<h3>Account Status</h3>
+
+<h2>Active</h2>
+
+<p>Verified</p>
+
+</div>
+
+</section>
+
+
+<h2 class="title">
+
+Popular Services
+
+</h2>
+
+
+<section class="services">
+
+
+<div class="service"
+
+th:each="service:${services}">
+
+<!-- Service icons -->
+
+<span th:if="${service.serviceName=='Electrician'}">
+⚡
+</span>
+
+<span th:if="${service.serviceName=='Plumber'}">
+🚰
+</span>
+
+<span th:if="${service.serviceName=='Carpenter'}">
+🪚
+</span>
+
+<span th:if="${service.serviceName=='Painter'}">
+🎨
+</span>
+
+<span th:if="${service.serviceName=='AC Repair'}">
+❄️
+</span>
+
+<span th:if="${service.serviceName=='Home Cleaning'}">
+🧹
+</span>
+
+<span th:if="${service.serviceName=='CCTV Installation'}">
+📹
+</span>
+
+<span th:if="${service.serviceName!='Electrician'
+and service.serviceName!='Plumber'
+and service.serviceName!='Carpenter'
+and service.serviceName!='Painter'
+and service.serviceName!='AC Repair'
+and service.serviceName!='Home Cleaning'
+and service.serviceName!='CCTV Installation'}">
+
+🛠️
+
+</span>
+
+
+<h3 th:text="${service.serviceName}">
+Service
+</h3>
+
+
+<p th:text="${service.description}">
+Description
+</p>
+
+
+<button class="book-btn"
+
+th:onclick="'window.location.href=\'/book-service/'+${service.id}+'\''">
+
+Book Service
+
+</button>
+
+</div>
+
+</section>
+
+
+
+<!-- Bottom section -->
+
+<section class="bottom">
+
+<div class="profile-card">
+
+<h2>Your Profile Summary</h2>
+
+<p>
+
+<strong>Name:</strong>
+
+<span th:text="${user!=null ? user.name:'Guest'}">
+
+Guest
+
+</span>
+
+</p>
+
+
+<p>
+
+<strong>Email:</strong>
+
+<span th:text="${user!=null ? user.email:'example@gmail.com'}">
+
+example@gmail.com
+
+</span>
+
+</p>
+
+
+<p>
+
+<strong>Role:</strong>
+
+<span th:text="${user!=null ? user.role:'Customer'}">
+
+Customer
+
+</span>
+
+</p>
+
+
+<p>
+
+<strong>Bookings:</strong>
+
+<span>
+
+6 Active Services
+
+</span>
+
+</p>
+
+
+<p>
+
+<strong>Status:</strong>
+
+<span style="color:green;font-weight:bold;">
+
+Verified ✓
+
+</span>
+
+</p>
+
+
+<p>
+
+<strong>Member Since:</strong>
+
+<span>
+
+May 2026
+
+</span>
+
+</p>
+
+</div>
+
+
+
+<div class="quick-card">
+
+<h2>
+
+Quick Actions
+
+</h2>
+
+
+<button
+onclick="window.location.href='/services'">
+
+🔍 Explore Services
+
+</button>
+
+
+<button
+onclick="window.location.href='/bookings'">
+
+📅 My Bookings
+
+</button>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+<script th:src="@{/js/dashboard.js}"></script>
+
+</body>
+</html>

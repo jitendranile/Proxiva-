@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Services - Proxiva</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+<body>
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+        <h1>PROXIVA</h1>
+        <p>Available Services</p>
+
+        <a href="/dashboard">🏠 Dashboard</a>
+        <a class="active" href="/services">🔍 Find Services</a>
+        <a href="/bookings">📅 My Bookings</a>
+        <a href="/login">🚪 Logout</a>
+    </aside>
+
+    <main class="main">
+
+        <section class="hero">
+            <div>
+                <h2>Explore Services 🔍</h2>
+                <p>Choose from available local services and book instantly.</p>
+            </div>
+            <div class="hero-icons">🛠️⚡🏠</div>
+        </section>
+
+        <h2 class="title">All Available Services</h2>
+
+        <section class="services">
+
+            <div class="service" th:each="service : ${services}">
+
+                <span th:if="${service.serviceName == 'Electrician'}">⚡</span>
+                <span th:if="${service.serviceName == 'Plumber'}">🚰</span>
+                <span th:if="${service.serviceName == 'Carpenter'}">🪚</span>
+                <span th:if="${service.serviceName == 'Painter'}">🎨</span>
+                <span th:if="${service.serviceName == 'AC Repair'}">❄️</span>
+                <span th:if="${service.serviceName == 'Home Cleaning'}">🧹</span>
+                <span th:if="${service.serviceName == 'CCTV Installation'}">📹</span>
+
+                <span th:if="${service.serviceName != 'Electrician'
+                          and service.serviceName != 'Plumber'
+                          and service.serviceName != 'Carpenter'
+                          and service.serviceName != 'Painter'
+                          and service.serviceName != 'AC Repair'
+                          and service.serviceName != 'Home Cleaning'
+                          and service.serviceName != 'CCTV Installation'}">🛠️</span>
+
+                <h3 th:text="${service.serviceName}">Service Name</h3>
+
+                <p th:text="${service.description}">Service Description</p>
+
+                <button class="book-btn"
+                        th:onclick="'window.location.href=\'/book-service/' + ${service.id} + '\''">
+                    Book Service
+                </button>
+            </div>
+
+            <div class="service" th:if="${services == null or services.size() == 0}">
+                <span>🔍</span>
+                <h3>No Services Available</h3>
+                <p>Please check again later.</p>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script th:src="@{/js/dashboard.js}"></script>
+</body>
+</html>
